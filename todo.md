@@ -1,0 +1,6 @@
+- change the font 
+- add the same user boarding page (ask for name first, ask to select theme and color )
+- add pomodoro timer  (with custom rest time)
+- Focus Analytics: Pair the Pomodoro timer with detailed insights on productivity patterns, such as how time is spent, peak focus hours, and progress tracking, to help users optimize their routines.
+- Dynamic Dashboard Customization: Allow users to fully customize their dashboard by adding, removing, or rearranging widgets (e.g., weather, to-do lists, and motivational quotes). This makes the extension adaptable to individual productivity styles.
+- Customizable Focus Playlists: Offer a curated set of ambient sounds or focus playlists (e.g., rain, white noise, or lo-fi music) to complement the Pomodoro timer and enhance concentration (Like give small icon playing rain sound etc)
