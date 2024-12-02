@@ -317,7 +317,7 @@ const FocusDashboard = () => {
               {/* Time Display */}
               <div className="text-center mb-8">
                 <div
-                  className={`text-8xl font-bold tracking-wider ${COLOR_SCHEMES[settings.colorScheme].primary}`}
+                  className={`text-5xl font-bold tracking-wider ${COLOR_SCHEMES[settings.colorScheme].primary}`}
                 >
                   {time.toLocaleTimeString('en-US', {
                     hour: '2-digit',
