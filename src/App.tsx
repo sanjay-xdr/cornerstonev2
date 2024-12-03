@@ -191,6 +191,20 @@ const FocusDashboard = () => {
       setFocus('');
     }
   };
+
+
+  const handleSettingsChange = (newSettings) => {
+    setSettings(newSettings);
+    localStorage.setItem('dashboardSettings', JSON.stringify(newSettings)); // Persist settings
+  };
+  
+  useEffect(() => {
+    const savedSettings = JSON.parse(localStorage.getItem('dashboardSettings'));
+    if (savedSettings) {
+      setSettings(savedSettings);
+    }
+  }, []);
+  
   const [userName, setUserName] = useState('');
   const [isNameSet, setIsNameSet] = useState(false);
 
@@ -395,7 +409,7 @@ const FocusDashboard = () => {
             isOpen={isSettingsOpen}
             onClose={() => setIsSettingsOpen(false)}
             settings={settings}
-            onSettingsChange={setSettings}
+            onSettingsChange={handleSettingsChange}
           />
         </div>
       )}
