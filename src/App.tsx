@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Clock, Target, Settings, Plus, Play, Pause, RefreshCw, Image, Palette, X, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Target, Settings, X } from 'lucide-react';
 
 const GRADIENT_PRESETS = [
   { name: 'Mystic Night', class: 'from-gray-900 via-purple-900 to-gray-900' },
@@ -390,17 +390,19 @@ const FocusDashboard = () => {
                     className="mt-4 w-full text-white py-2 rounded-lg hover:bg-purple-500">Let's Do this
                  </button>
               </div>
-              <div>
-                <br></br>
-          <h3 className={`text-2xl font-bold ${COLOR_SCHEMES[settings.colorScheme].primary} `}>Tasks :</h3>
-          <ul className="space-y-2">
-            {tasks.map((task, index) => (
-              <li key={index} className="mt-3 w-full text-white py-2 rounded-lg hover:bg-purple-500">
-                {task}
-              </li>
-            ))}
-          </ul>
-        </div>
+              <br></br>
+              {tasks.length > 0 && (
+                  <div>
+                  <h3 className={`text-2xl font-bold ${COLOR_SCHEMES[settings.colorScheme].primary}`}>Tasks:</h3>
+                  <ul className="space-y-2">
+                  {tasks.map((task, index) => (
+                  <li key={index} className="mt-3 w-full text-white py-2 rounded-lg hover:bg-purple-500">
+                  {task}
+                   </li>
+                    ))}
+                    </ul>
+                    </div>
+                  )}
           </div>
           </div>
 
