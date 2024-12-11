@@ -16,7 +16,7 @@ interface ColorScheme {
   secondary: string;
   hover: string;
 }
-type BaseColor = "yellow" | "blue" | "purple" | "green" | "pink";
+type BaseColor = "yellow" | "blue" | "purple" | "green" | "pink" | "white";
 
 const COLOR_SCHEMES: Record<BaseColor, ColorScheme> = {
   yellow: {
@@ -44,7 +44,12 @@ const COLOR_SCHEMES: Record<BaseColor, ColorScheme> = {
     secondary: "text-pink-600",
     hover: "hover:bg-pink-400/10",
   },
+  white: {
+    primary: "text-white",
+    secondary: "text-neutral-600",
+    hover: "hover:bg-neutral-400/10",
+  },
 };
 
-export { GRADIENT_PRESETS, COLOR_SCHEMES };  export type { BaseColor };
-
+export { GRADIENT_PRESETS, COLOR_SCHEMES };
+export type { BaseColor };

@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { COLOR_SCHEMES, GRADIENT_PRESETS } from "../assets/Color";
 import { BaseColor } from "../assets/Color";
+import {
+  Target,
+  Settings,
+} from "lucide-react";
+import { SettingsPanel } from "../components/SettingsPanel";
+
+
+interface Settings {
+  backgroundType: string;
+  backgroundValue: string;
+  colorScheme: string;
+  glassEffect: boolean;
+  blurAmount:number
+}
 
 export const Onboarding = () => {
   const [time, setTime] = useState(new Date());
@@ -8,7 +22,7 @@ export const Onboarding = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false); // New state for theme modal
-  const [tasks, setTasks] = useState([]); // New state for tasks
+  const [tasks, setTasks] = useState<Task[]>([]); // New state for tasks
   const [settings, setSettings] = useState({
     backgroundType: "gradient",
     backgroundValue: GRADIENT_PRESETS[0].class,
@@ -29,34 +43,41 @@ export const Onboarding = () => {
     if(savedTasks){
         try{
 
-            const parsedTasks : Task[]=JSON.parse(localStorage.getItem("tasks"));
+            const parsedTasks : Task[]=JSON.parse(savedTasks);
+            setTasks(parsedTasks);
         }catch (err){
             
         }
     }
-
-    const savedTasksf = JSON.parse(localStorage.getItem("tasks")) || [];
-    setTasks(savedTasks);
   }, []);
 
-  const handleAddTask = () => {
-    if (focus.trim() !== "") {
-      const newTasks = [...tasks, focus];
-      setTasks(newTasks);
-      localStorage.setItem("tasks", JSON.stringify(newTasks)); // Persist tasks immediately
-      setFocus("");
-    }
-  };
 
-  const handleSettingsChange = (newSettings) => {
+const handleAddTask = () => {
+  if (focus.trim() !== "") {
+    const newTask: Task = {
+      id: "adfdasf", // Unique ID for the task
+      title: focus.trim(),
+      completed: false, // Default value for a new task
+    };
+
+    const newTasks = [...tasks, newTask];
+    setTasks(newTasks);
+    localStorage.setItem("tasks", JSON.stringify(newTasks)); // Persist tasks immediately
+    setFocus(""); // Clear input
+  }
+};
+
+
+  const handleSettingsChange = (newSettings:Settings) => {
     setSettings(newSettings);
     localStorage.setItem("dashboardSettings", JSON.stringify(newSettings)); // Persist settings
   };
 
   useEffect(() => {
-    const savedSettings = JSON.parse(localStorage.getItem("dashboardSettings"));
-    if (savedSettings) {
-      setSettings(savedSettings);
+    const savedSettings= localStorage.getItem("dashboardSettings");
+    if(savedSettings){
+      const parsedSavedSettings=JSON.parse(savedSettings);
+      setSettings(parsedSavedSettings);
     }
   }, []);
 
@@ -277,7 +298,7 @@ export const Onboarding = () => {
                       key={index}
                       className="mt-3 w-full text-white py-2 rounded-lg hover:bg-purple-500"
                     >
-                      {task}
+                      {task.title}
                     </li>
                   ))}
                 </ul>
