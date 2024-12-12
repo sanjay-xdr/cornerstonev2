@@ -4,8 +4,11 @@ import { BaseColor } from "../assets/Color";
 import {
   Target,
   Settings,
+  Timer, 
+  TimerIcon
 } from "lucide-react";
 import { SettingsPanel } from "../components/SettingsPanel";
+import PomodoroTimerPanel from "../components/PomodoroTimerPanel";
 
 
 interface Settings {
@@ -21,6 +24,7 @@ export const Onboarding = () => {
   const [focus, setFocus] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isTimerOpen, setIsTimerOpen]=useState(false);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false); // New state for theme modal
   const [tasks, setTasks] = useState<Task[]>([]); // New state for tasks
   const [settings, setSettings] = useState({
@@ -208,9 +212,26 @@ const handleAddTask = () => {
                   <Settings
                     className={
                       COLOR_SCHEMES[settings.colorScheme as BaseColor].primary
-                    }
-                  />
+                    }/>
+                   
                 </button>
+
+              <div className="mt-2">
+              <button
+                  onClick={() => setIsTimerOpen(true)}
+                  className={`p-3 rounded-lg transition-all duration-300 hover:scale-105 ${
+                    settings.glassEffect
+                      ? "bg-white/10 backdrop-blur"
+                      : "bg-gray-800"
+                  } ${COLOR_SCHEMES[settings.colorScheme as BaseColor].hover}`}
+                >
+                  <TimerIcon
+                    className={
+                      COLOR_SCHEMES[settings.colorScheme as BaseColor].primary
+                    }/>
+                   
+                </button>
+                </div>
               </div>
 
               {/* Time Display */}
@@ -313,6 +334,16 @@ const handleAddTask = () => {
             settings={settings}
             onSettingsChange={handleSettingsChange}
           />
+
+          {/*Pomodoro Timer Panel */}
+          <PomodoroTimerPanel
+  isOpen={isTimerOpen}
+  onClose={() => setIsTimerOpen(false)}
+  colorScheme={settings.colorScheme}
+  glassEffect={settings.glassEffect}
+  blurAmount={settings.blurAmount}
+/>
+          
         </div>
       )}
     </div>
